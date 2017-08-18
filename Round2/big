@@ -1,0 +1,48 @@
+import java.util.*;
+import java.lang.*;
+import java.math.*;
+class Prime{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String[] st = new String [4];
+
+		for(int i1 =0; i1<4;i1++){
+			st[i1]=sc.nextLine();
+		}
+		BigInteger a[][]= new BigInteger[4][2];
+		for(int i1 =0; i1<4;i1++){
+			StringTokenizer str = new StringTokenizer(st[i1],",");
+			int j=0;
+			while(str.hasMoreTokens()){
+				a[i1][j]=new BigInteger(str.nextToken());
+				j++;
+			}
+		}
+		
+
+		
+		BigInteger b []= new BigInteger[2];
+		b[0]=a[1][0].multiply(new BigInteger("2")).add(a[2][0]).subtract(a[3][0]);
+		b[1]=a[1][1].multiply(new BigInteger("2")).add(a[2][1]).subtract(a[3][1]);
+
+	
+		int max =0;
+		if(b[0].compareTo(b[1])>0)
+			max = 0;
+		else
+			max = 1;
+		int i=0;
+		
+		for(i=b[max];i<a[0][0]*a[0][1];i=i+a[0][max]){
+			if(max==0){
+				if(i%a[0][1]==b[1])
+					break;
+			}else if(max==1){
+				if(i%a[0][0]==b[0])
+					break;
+			}
+		}
+		System.out.println(i);
+		
+	}
+}
